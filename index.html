@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LYFER PROCONTACT IMPORTER</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -11,18 +11,21 @@
         body {
             background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
             min-height: 100vh;
+            font-size: 14px;
+            padding: 0.5rem;
         }
         .container {
-            max-width: 900px;
+            max-width: 100%;
+            padding: 0 0.5rem;
         }
         .header {
             background: linear-gradient(135deg, #1e3a8a, #1e293b);
             color: white;
-            padding: 3rem;
-            border-radius: 1rem;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             position: relative;
             overflow: hidden;
         }
@@ -38,10 +41,10 @@
         }
         .header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 3rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: white;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             animation: scaleIn 0.6s ease-out;
             position: relative;
         }
@@ -50,17 +53,20 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .header p {
-            font-size: 1.25rem;
+            font-size: 0.875rem;
             color: #e5e7eb;
-            margin-top: 0.75rem;
+            margin-top: 0.5rem;
             position: relative;
         }
         textarea {
             resize: vertical;
-            min-height: 200px;
+            min-height: 150px;
+            font-size: 0.875rem;
         }
         .btn-primary {
             transition: transform 0.2s, background-color 0.3s;
+            padding: 0.75rem;
+            font-size: 0.875rem;
         }
         .btn-primary:hover {
             transform: scale(1.05);
@@ -68,10 +74,12 @@
         }
         .output {
             transition: opacity 0.3s;
+            font-size: 0.875rem;
         }
         .example-box {
             background: #f9fafb;
-            border-left: 4px solid #3b82f6;
+            border-left: 3px solid #3b82f6;
+            padding: 0.75rem;
         }
         .custom-select {
             position: relative;
@@ -80,16 +88,17 @@
         .custom-select-button {
             display: flex;
             align-items: center;
-            padding: 1rem;
+            padding: 0.5rem;
             border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
+            border-radius: 0.375rem;
             background: white;
             cursor: pointer;
+            font-size: 0.875rem;
         }
         .custom-select-button img {
-            width: 24px;
-            height: 16px;
-            margin-right: 8px;
+            width: 20px;
+            height: 14px;
+            margin-right: 6px;
         }
         .custom-select-dropdown {
             display: none;
@@ -97,11 +106,11 @@
             top: 100%;
             left: 0;
             right: 0;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             background: white;
             border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
+            border-radius: 0.375rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
@@ -111,30 +120,31 @@
         .custom-select-option {
             display: flex;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem;
             cursor: pointer;
+            font-size: 0.875rem;
         }
         .custom-select-option:hover {
             background: #f3f4f6;
         }
         .custom-select-option img {
-            width: 24px;
-            height: 16px;
-            margin-right: 8px;
+            width: 20px;
+            height: 14px;
+            margin-right: 6px;
         }
         .chatbot-container {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             z-index: 1000;
         }
         .chatbot-toggle {
             background: #3b82f6;
             color: white;
-            padding: 1rem;
+            padding: 0.75rem;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
         }
         .chatbot-toggle:hover {
@@ -142,11 +152,12 @@
         }
         .chatbot-window {
             display: none;
-            width: 300px;
-            max-height: 400px;
+            width: 90vw;
+            max-width: 300px;
+            max-height: 70vh;
             background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 0.375rem;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
         .chatbot-window.show {
@@ -155,30 +166,32 @@
         .chatbot-header {
             background: #1e3a8a;
             color: white;
-            padding: 0.75rem;
+            padding: 0.5rem;
             font-weight: 600;
+            font-size: 0.875rem;
         }
         .chatbot-messages {
-            max-height: 300px;
+            max-height: 50vh;
             overflow-y: auto;
-            padding: 1rem;
+            padding: 0.75rem;
             background: #f9fafb;
+            font-size: 0.75rem;
         }
         .chatbot-message {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             padding: 0.5rem;
             border-radius: 0.25rem;
         }
         .chatbot-message.user {
             background: #3b82f6;
             color: white;
-            margin-left: 2rem;
+            margin-left: 1.5rem;
             text-align: right;
         }
         .chatbot-message.bot {
             background: #e5e7eb;
             color: #1f2937;
-            margin-right: 2rem;
+            margin-right: 1.5rem;
         }
         .chatbot-input {
             display: flex;
@@ -189,37 +202,41 @@
             padding: 0.5rem;
             border: none;
             outline: none;
+            font-size: 0.75rem;
         }
         .chatbot-input button {
             background: #3b82f6;
             color: white;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
             border: none;
             cursor: pointer;
+            font-size: 0.75rem;
         }
         .chatbot-input button:hover {
             background: #2563eb;
         }
         .footer {
             text-align: center;
-            padding: 1rem;
+            padding: 0.75rem;
             color: #6b7280;
-            font-size: 0.875rem;
-            margin-top: 2rem;
+            font-size: 0.75rem;
+            margin-top: 1rem;
         }
         .image-upload-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            align-items: stretch;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
         }
         .image-upload-label {
-            display: inline-block;
-            padding: 0.5rem 1rem;
+            display: block;
+            padding: 0.5rem;
             background: #e5e7eb;
-            border-radius: 0.5rem;
+            border-radius: 0.375rem;
             cursor: pointer;
+            text-align: center;
+            font-size: 0.875rem;
             transition: background-color 0.3s;
         }
         .image-upload-label:hover {
@@ -231,33 +248,34 @@
         .image-preview-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 0.5rem;
         }
         .image-preview-item {
             position: relative;
-            max-width: 100px;
+            max-width: 80px;
         }
         .image-preview {
             max-width: 100%;
-            max-height: 100px;
-            border-radius: 0.5rem;
+            max-height: 80px;
+            border-radius: 0.375rem;
             cursor: pointer;
         }
         .delete-button {
             position: absolute;
-            top: 5px;
-            right: 5px;
+            top: 3px;
+            right: 3px;
             background: #ef4444;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
+            font-size: 0.75rem;
         }
         .delete-button:hover {
             transform: scale(1.1);
@@ -265,6 +283,7 @@
         }
         .upload-controls {
             display: flex;
+            flex-wrap: wrap;
             gap: 0.5rem;
         }
         .modal {
@@ -285,22 +304,22 @@
         .modal img {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 0.5rem;
+            border-radius: 0.375rem;
         }
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             background: #ef4444;
             color: white;
             border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1rem;
         }
         .modal-close:hover {
             background: #dc2626;
@@ -322,19 +341,19 @@
         }
         .loading-content {
             background: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
+            padding: 1rem;
+            border-radius: 0.375rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
         .spinner {
-            border: 4px solid #f3f4f6;
-            border-top: 4px solid #3b82f6;
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #3b82f6;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
         }
         @keyframes spin {
@@ -343,19 +362,19 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center p-4">
+<body>
     <div class="container mx-auto">
         <div class="header">
-            <h1>LYFER PROCONTACT IMPORTER</h1>
-            <p>Effortlessly import up to 1000 contacts to your iPhone or Android with a single click.</p>
+            <h1>LYFER PRO CONTACT IMPORTER</h1>
+            <p>Import up to 1000 contacts to your phone with ease.</p>
         </div>
 
-        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
-            <h2 class="text-xl font-semibold mb-4">How It Works</h2>
-            <p class="text-gray-600 mb-4">Paste up to 100 contacts at a time in any format (e.g., CSV, space-separated) or upload multiple screenshots to extract all 10-digit phone numbers automatically from every line or comment. The app will format to: name, phone/email, blank line. Repeat for up to 1000 total contacts.</p>
-            <div class="example-box p-4 mb-4">
-                <p class="font-semibold">Example Format (after auto-formatting):</p>
-                <pre class="text-sm text-gray-700">
+        <div class="bg-white shadow-md rounded-lg p-4 mb-6">
+            <h2 class="text-lg font-semibold mb-3">How It Works</h2>
+            <p class="text-gray-600 mb-3 text-sm">Paste up to 100 contacts (name, phone/email) or upload screenshots to extract 10-digit phone numbers. The app formats them for you. Repeat for up to 1000 contacts.</p>
+            <div class="example-box mb-3">
+                <p class="font-semibold text-sm">Example Format:</p>
+                <pre class="text-xs text-gray-700">
 John Doe
 +11234567890
 
@@ -363,20 +382,16 @@ Jane Smith
 jane.smith@example.com
                 </pre>
             </div>
-            <div class="image-upload-container mb-4">
+            <div class="image-upload-container mb-3">
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
                 <div class="upload-controls">
-                    <label for="imageUpload" class="image-upload-label">Upload Screenshots to Extract Phone Numbers</label>
+                    <label for="imageUpload" class="image-upload-label">Upload Screenshots</label>
                     <input type="file" id="imageUpload" class="image-upload-input" accept="image/*" multiple>
-                    <button onclick="extractNumbersFromImages()" class="btn-primary bg-blue-600 text-white py-2 px-4 rounded-lg">Extract Numbers</button>
+                    <button onclick="extractNumbersFromImages()" class="btn-primary bg-blue-600 text-white py-2 px-3 rounded-lg text-sm">Extract Numbers</button>
                 </div>
             </div>
-            <div id="fullScreenModal" class="modal">
-                <img id="fullScreenImage" alt="Full Screen Preview">
-                <div class="modal-close" onclick="closeFullScreen()">×</div>
-            </div>
-            <div class="mb-4">
-                <label for="countrySelect" class="block text-gray-700 font-semibold mb-2">Select Country</label>
+            <div class="mb-3">
+                <label for="countrySelect" class="block text-gray-700 font-semibold text-sm mb-1">Select Country</label>
                 <div class="custom-select">
                     <div class="custom-select-button" onclick="toggleDropdown()">
                         <img src="https://flagcdn.com/w20/us.png" alt="United States">
@@ -447,7 +462,7 @@ jane.smith@example.com
                         <div class="custom-select-option" data-value="GM" data-calling-code="+220"><img src="https://flagcdn.com/w20/gm.png" alt="Gambia"> Gambia (+220)</div>
                         <div class="custom-select-option" data-value="GE" data-calling-code="+995"><img src="https://flagcdn.com/w20/ge.png" alt="Georgia"> Georgia (+995)</div>
                         <div class="custom-select-option" data-value="DE" data-calling-code="+49"><img src="https://flagcdn.com/w20/de.png" alt="Germany"> Germany (+49)</div>
-                        <div class="custom-select-option" data-value="GH" data-calling-code="+233"><img src="https://flagcdn.com/w20/gh.png" alt="Ghana"> Gh nutrit (+233)</div>
+                        <div class="custom-select-option" data-value="GH" data-calling-code="+233"><img src="https://flagcdn.com/w20/gh.png" alt="Ghana"> Ghana (+233)</div>
                         <div class="custom-select-option" data-value="GR" data-calling-code="+30"><img src="https://flagcdn.com/w20/gr.png" alt="Greece"> Greece (+30)</div>
                         <div class="custom-select-option" data-value="GD" data-calling-code="+1-473"><img src="https://flagcdn.com/w20/gd.png" alt="Grenada"> Grenada (+1-473)</div>
                         <div class="custom-select-option" data-value="GT" data-calling-code="+502"><img src="https://flagcdn.com/w20/gt.png" alt="Guatemala"> Guatemala (+502)</div>
@@ -480,7 +495,7 @@ jane.smith@example.com
                         <div class="custom-select-option" data-value="LR" data-calling-code="+231"><img src="https://flagcdn.com/w20/lr.png" alt="Liberia"> Liberia (+231)</div>
                         <div class="custom-select-option" data-value="LY" data-calling-code="+218"><img src="https://flagcdn.com/w20/ly.png" alt="Libya"> Libya (+218)</div>
                         <div class="custom-select-option" data-value="LI" data-calling-code="+423"><img src="https://flagcdn.com/w20/li.png" alt="Liechtenstein"> Liechtenstein (+423)</div>
-                        <div class="custom-select-option" data-value="LT" data-calling-code="+370"><img src="https://flagcdn.com/w20/lt.png" alt="Lithuania"> Lithuaniarq (+370)</div>
+                        <div class="custom-select-option" data-value="LT" data-calling-code="+370"><img src="https://flagcdn.com/w20/lt.png" alt="Lithuania"> Lithuania (+370)</div>
                         <div class="custom-select-option" data-value="LU" data-calling-code="+352"><img src="https://flagcdn.com/w20/lu.png" alt="Luxembourg"> Luxembourg (+352)</div>
                         <div class="custom-select-option" data-value="MG" data-calling-code="+261"><img src="https://flagcdn.com/w20/mg.png" alt="Madagascar"> Madagascar (+261)</div>
                         <div class="custom-select-option" data-value="MW" data-calling-code="+265"><img src="https://flagcdn.com/w20/mw.png" alt="Malawi"> Malawi (+265)</div>
@@ -582,18 +597,18 @@ jane.smith@example.com
                     <input type="hidden" id="countryCallingCode" value="+1">
                 </div>
             </div>
-            <textarea id="contactInput" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Paste your contacts here (e.g., CSV, space-separated) or upload screenshots above..."></textarea>
-            <button onclick="generateVCF()" class="btn-primary w-full mt-4 bg-blue-600 text-white py-3 rounded-lg font-semibold">Generate & Download Contacts (.vcf)</button>
+            <textarea id="contactInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Paste contacts (e.g., CSV, space-separated) or upload screenshots..."></textarea>
+            <button onclick="generateVCF()" class="btn-primary w-full mt-3 bg-blue-600 text-white py-2 rounded-lg font-semibold text-sm">Generate & Download (.vcf)</button>
         </div>
 
-        <div id="output" class="output text-center text-gray-700"></div>
+        <div id="output" class="output text-center text-gray-700 text-sm"></div>
 
         <div class="chatbot-container">
             <div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
             <div id="chatbotWindow" class="chatbot-window">
                 <div class="chatbot-header">Contact Importer Help</div>
                 <div id="chatbotMessages" class="chatbot-messages">
-                    <div class="chatbot-message bot">Welcome! I'm here to answer any questions about the LYFER PROCONTACT IMPORTER or anything else. Ask away!</div>
+                    <div class="chatbot-message bot">Welcome! Ask any question about the LYFER PROCONTACT IMPORTER!</div>
                 </div>
                 <div class="chatbot-input">
                     <input id="chatbotInput" type="text" placeholder="Type your question...">
@@ -614,7 +629,7 @@ jane.smith@example.com
         <div id="loadingOverlay" class="loading-overlay">
             <div class="loading-content">
                 <div class="spinner"></div>
-                <p class="text-gray-700">Processing images...</p>
+                <p class="text-gray-700 text-sm">Processing images...</p>
             </div>
         </div>
     </div>
@@ -682,7 +697,7 @@ jane.smith@example.com
                 reader.readAsDataURL(file);
             });
 
-            output.innerHTML = `<p class="text-blue-600">${files.length} image(s) uploaded. Click an image to view full screen, "Extract Numbers" to process, or the trash icon to delete.</p>`;
+            output.innerHTML = `<p class="text-blue-600">${files.length} image(s) uploaded. Tap to view, extract, or delete.</p>`;
             event.target.value = '';
         });
 
@@ -692,8 +707,8 @@ jane.smith@example.com
             previewItem.remove();
             const output = document.getElementById('output');
             output.innerHTML = uploadedImages.length > 0
-                ? `<p class="text-blue-600">Image deleted. ${uploadedImages.length} image(s) remaining. Click an image to view full screen, "Extract Numbers" to process, or the trash icon to delete.</p>`
-                : `<p class="text-blue-600">All images deleted. Upload new images to extract phone numbers.</p>`;
+                ? `<p class="text-blue-600">Image deleted. ${uploadedImages.length} image(s) remaining.</p>`
+                : `<p class="text-blue-600">All images deleted. Upload new images.</p>`;
         }
 
         function openFullScreen(imgId) {
@@ -718,7 +733,7 @@ jane.smith@example.com
             const loadingOverlay = document.getElementById('loadingOverlay');
 
             if (uploadedImages.length === 0) {
-                output.innerHTML = '<p class="text-red-500">Please upload at least one image first.</p>';
+                output.innerHTML = '<p class="text-red-500">Please upload at least one image.</p>';
                 return;
             }
 
@@ -760,7 +775,7 @@ jane.smith@example.com
             loadingOverlay.classList.remove('show');
 
             if (allPhoneNumbers.length === 0) {
-                output.innerHTML = `<p class="text-red-500">No valid 10-digit phone numbers found in the image(s). ${errorCount > 0 ? 'Some images failed to process.' : ''}</p>`;
+                output.innerHTML = `<p class="text-red-500">No valid 10-digit phone numbers found. ${errorCount > 0 ? 'Some images failed to process.' : ''}</p>`;
                 return;
             }
 
@@ -771,7 +786,7 @@ jane.smith@example.com
             });
 
             contactInput.value = formattedText.trim();
-            output.innerHTML = `<p class="text-green-600">Extracted ${allPhoneNumbers.length} valid 10-digit phone numbers from ${uploadedImages.length} image(s). ${errorCount > 0 ? `${errorCount} image(s) failed to process.` : ''} Review in the textarea and click "Generate & Download".</p>`;
+            output.innerHTML = `<p class="text-green-600">Extracted ${allPhoneNumbers.length} phone numbers from ${uploadedImages.length} image(s). ${errorCount > 0 ? `${errorCount} image(s) failed.` : ''} Review and generate .vcf.</p>`;
         }
 
         document.getElementById('contactInput').addEventListener('paste', (event) => {
@@ -824,9 +839,9 @@ jane.smith@example.com
             document.getElementById('contactInput').value = formattedText.trim();
 
             if (validContacts > 0) {
-                output.innerHTML = `<p class="text-blue-600">Pasted data reformatted into ${validContacts} valid contacts. Review and click "Generate & Download".</p>`;
+                output.innerHTML = `<p class="text-blue-600">Reformatted ${validContacts} contacts. Review and generate .vcf.</p>`;
             } else {
-                output.innerHTML = `<p class="text-red-500">No valid contacts found in pasted data. Ensure each contact has a name and a 10-digit phone number or email.</p>`;
+                output.innerHTML = `<p class="text-red-500">No valid contacts found. Ensure name and 10-digit phone/email.</p>`;
             }
         });
 
@@ -837,18 +852,18 @@ jane.smith@example.com
             const callingCode = document.getElementById('countryCallingCode').value;
 
             if (!input) {
-                output.innerHTML = '<p class="text-red-500">Please paste some contacts or upload images first!</p>';
+                output.innerHTML = '<p class="text-red-500">Paste contacts or upload images first!</p>';
                 return;
             }
 
             const lines = input.split('\n').map(line => line.trim()).filter(line => line);
             if (lines.length % 2 !== 0) {
-                output.innerHTML = '<p class="text-red-500">Odd number of lines. Each contact needs a name and a phone/email. Adjust and try again.</p>';
+                output.innerHTML = '<p class="text-red-500">Odd number of lines. Each contact needs a name and phone/email.</p>';
                 return;
             }
 
             if (lines.length > 200) {
-                output.innerHTML = '<p class="text-red-500">Too many lines. Please paste up to 100 contacts (200 lines) at a time.</p>';
+                output.innerHTML = '<p class="text-red-500">Too many lines. Paste up to 100 contacts (200 lines).</p>';
                 return;
             }
 
@@ -868,7 +883,7 @@ jane.smith@example.com
             }
 
             if (contacts.length === 0) {
-                output.innerHTML = '<p class="text-red-500">No valid contacts found. Check your format (names and 10-digit phone numbers or emails).</p>';
+                output.innerHTML = '<p class="text-red-500">No valid contacts. Check format (name, 10-digit phone/email).</p>';
                 return;
             }
 
@@ -893,7 +908,7 @@ END:VCARD
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            output.innerHTML = `<p class="text-green-600">Success! Downloaded <strong>contacts.vcf</strong> with ${contacts.length} contacts. Open the file in your phone's Contacts app to import them all at once.</p>`;
+            output.innerHTML = `<p class="text-green-600">Downloaded <strong>contacts.vcf</strong> with ${contacts.length} contacts. Open in your Contacts app.</p>`;
         }
 
         function toggleChatbot() {
@@ -913,29 +928,29 @@ END:VCARD
             userMessage.textContent = question;
             messages.appendChild(userMessage);
 
-            let botResponse = "Sorry, I'm having trouble connecting to the AI service. Please try again or ask about the LYFER PROCONTACT IMPORTER for more specific help.";
+            let botResponse = "Sorry, I'm having trouble connecting to the AI service. Please try again or ask about the LYFER PROCONTACT IMPORTER.";
             if (question.toLowerCase().includes('how to use') || question.toLowerCase().includes('how does it work')) {
-                botResponse = "To use the LYFER PROCONTACT IMPORTER, paste up to 100 contacts in any format (e.g., CSV, space-separated) into the textarea or upload multiple screenshots to extract all 10-digit phone numbers from every line or comment. Select a country to apply the correct country code. Compact image previews (100px wide) appear above the upload and extract buttons. Click an image to view it full screen, 'Extract Numbers' to process all images (a loading screen will appear), or the trash icon to delete an image. Click 'Generate & Download Contacts (.vcf)' to create a .vcf file, which you can open in your phone's Contacts app to import.";
+                botResponse = "Paste up to 100 contacts (name, phone/email) or upload screenshots to extract 10-digit phone numbers. Select a country for the correct code. Tap previews (80px wide) to view full screen, extract numbers, or delete with the trash icon. Generate a .vcf file to import into your Contacts app.";
             } else if (question.toLowerCase().includes('country code') || question.toLowerCase().includes('phone number format')) {
-                botResponse = "Select a country from the dropdown to set the country code (e.g., +1 for the US). The app ensures phone numbers are exactly 10 digits (excluding the country code) and adds the selected country code.";
+                botResponse = "Select a country to set the code (e.g., +1 for US). Phone numbers must be 10 digits (excluding code).";
             } else if (question.toLowerCase().includes('how many contacts') || question.toLowerCase().includes('limit')) {
-                botResponse = "You can paste or extract up to 100 contacts at a time (200 lines, with each contact needing a name and a 10-digit phone number or email). Repeat the process for up to 1000 contacts in total.";
+                botResponse = "Paste or extract up to 100 contacts (200 lines) at a time. Repeat for up to 1000 total.";
             } else if (question.toLowerCase().includes('vcf') || question.toLowerCase().includes('what is vcf')) {
-                botResponse = "A .vcf file is a vCard file that stores contact information. The app generates a .vcf file from your contacts or extracted phone numbers, which you can open in your phone's Contacts app to import.";
+                botResponse = "A .vcf file stores contacts. Generate it and open it in your Contacts app to import.";
             } else if (question.toLowerCase().includes('supported devices') || question.toLowerCase().includes('iphone') || question.toLowerCase().includes('android')) {
-                botResponse = "The LYFER PROCONTACT IMPORTER works with both iPhone and Android. The generated .vcf file is compatible with the Contacts app on both platforms.";
+                botResponse = "Works with iPhone and Android. The .vcf file is compatible with both Contacts apps.";
             } else if (question.toLowerCase().includes('screenshot') || question.toLowerCase().includes('image upload') || question.toLowerCase().includes('extract numbers')) {
-                botResponse = "Upload multiple screenshots using the 'Upload Screenshots' button. Compact previews (100px wide) appear above the buttons. Click an image to view it full screen, 'Extract Numbers' to detect all 10-digit phone numbers from every line or comment in all images (a loading screen will appear), or use the trash icon to delete an image.";
+                botResponse = "Upload screenshots via 'Upload Screenshots'. Tap previews (80px wide) to view full screen, extract 10-digit numbers, or delete with the trash icon.";
             } else if (question.toLowerCase().includes('delete image') || question.toLowerCase().includes('remove image') || question.toLowerCase().includes('trash icon')) {
-                botResponse = "To delete an uploaded image, click the trash can icon (🗑️) on the top-right corner of its compact preview above the upload and extract buttons.";
+                botResponse = "Tap the trash icon (🗑️) on an image preview to delete it.";
             } else if (question.toLowerCase().includes('10 digits') || question.toLowerCase().includes('phone number length')) {
-                botResponse = "The app extracts phone numbers that are exactly 10 digits long (excluding country codes) from every line or comment in the screenshots or pasted text, then adds the selected country code.";
+                botResponse = "Extracts 10-digit phone numbers (excluding country code) and adds the selected code.";
             } else if (question.toLowerCase().includes('full screen') || question.toLowerCase().includes('view image')) {
-                botResponse = "Click a compact image preview (100px wide, above the upload and extract buttons) to view that screenshot in full screen. Click the '×' button in the top-right corner to close the full-screen view.";
+                botResponse = "Tap an image preview to view full screen. Tap '×' to close.";
             } else if (question.toLowerCase().includes('multiple screenshots') || question.toLowerCase().includes('plenty screenshots')) {
-                botResponse = "You can upload multiple screenshots at once using the 'Upload Screenshots' button. Each image gets a compact preview (100px wide) above the buttons. Click 'Extract Numbers' to process all images (a loading screen will appear), extracting all 10-digit phone numbers from every line or comment. You can delete individual images with the trash icon or view them full screen by clicking the preview.";
+                botResponse = "Upload multiple screenshots. Previews (80px wide) appear above buttons. Tap to view full screen, extract numbers, or delete.";
             } else if (question.toLowerCase().includes('loading') || question.toLowerCase().includes('processing')) {
-                botResponse = "When you click 'Extract Numbers', a loading screen with a spinner appears in the center of the screen while the app processes the uploaded images to extract 10-digit phone numbers. It disappears once the extraction is complete or if an error occurs.";
+                botResponse = "A loading spinner appears when extracting numbers from images. It disappears when done.";
             }
 
             const botMessage = document.createElement('div');
