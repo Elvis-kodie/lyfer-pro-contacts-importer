@@ -405,8 +405,9 @@
                 <pre class="text-sm text-gray-700">
 John Doe
 +12025550123
+
 Jane Smith
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bd979c9398d38e90948995bd98859c908d9198d39e9290">[email&#160;protected]</a>
+example@email.com
                 </pre>
             </div>
             <div class="image-upload-container mb-4">
@@ -964,6 +965,7 @@ Jane Smith
             clearTimeout(window.reformatTimeout);
             window.reformatTimeout = setTimeout(reformatContacts, 500);
         });
+        let contactCounter = 1;
         function generateVCF() {
             const input = document.getElementById('contactInput').value.trim();
             const output = document.getElementById('output');
@@ -973,53 +975,57 @@ Jane Smith
                 output.innerHTML = '<p class="text-red-500">Please paste some contacts or upload images first!</p>';
                 return;
             }
-            const lines = input.split('\n').map(line => line.trim()).filter(line => line);
-            if (lines.length % 2 !== 0) {
-                output.innerHTML = '<p class="text-red-500">Odd number of lines. Each contact needs a name and a phone/email. Adjust and try again.</p>';
+            const blocks = input.split(/\n\s*\n/).map(block => block.trim()).filter(block => block);
+            if (blocks.length === 0) {
+                output.innerHTML = '<p class="text-red-500">No contacts to process.</p>';
                 return;
             }
-            if (lines.length > 200)
-            if (lines.length > 200) {
-                output.innerHTML = '<p class="text-red-500">Too many lines. Please paste up to 100 contacts (200 lines) at a time.</p>';
+            const firstBlock = blocks[0];
+            const firstBlockLines = firstBlock.split('\n').map(l => l.trim()).filter(l => l);
+            if (firstBlockLines.length !== 2) {
+                output.innerHTML = '<p class="text-red-500">Invalid format for first contact. Needs name and phone/email.</p>';
                 return;
             }
-            const contacts = [];
-            for (let i = 0; i < lines.length; i += 2) {
-                const name = lines[i];
-                let phone = lines[i + 1];
-                if (!phone.includes('@')) {
-                    const cleanedPhone = phone.replace(/[^0-9+]/g, '');
-                    if (cleanedPhone.startsWith(callingCode) && cleanedPhone.length >= callingCode.length + 7) {
-                        contacts.push({ name, phone: cleanedPhone });
-                    }
-                } else {
-                    contacts.push({ name, phone });
-                }
+            const name = firstBlockLines[0];
+            let contactValue = firstBlockLines[1];
+            let isEmail = isValidEmail(contactValue);
+            let isPhone = false;
+            if (!isEmail) {
+                contactValue = normalizePhoneNumber(contactValue, callingCode);
+                if (contactValue) isPhone = true;
             }
-            if (contacts.length === 0) {
-                output.innerHTML = `<p class="text-red-500">No valid contacts found. Check your format (names and phone numbers with country code ${callingCode} or emails).</p>`;
+            if (!isEmail && !isPhone) {
+                output.innerHTML = `<p class="text-red-500">Invalid contact for "${name}": Must be email or phone with ${callingCode}.</p>`;
                 return;
             }
-            let vcfContent = '';
-            contacts.forEach(contact => {
-                vcfContent += `BEGIN:VCARD
+            let vcfContent = `BEGIN:VCARD
 VERSION:3.0
-FN:${contact.name}
-${contact.phone.includes('@') ? `EMAIL:${contact.phone}` : `TEL:${contact.phone}`}
+FN:${name}
+${isEmail ? `EMAIL:${contactValue}` : `TEL:${contactValue}`}
 ADR;TYPE=HOME:;;;${country};;;
 END:VCARD
 `;
-            });
             const blob = new Blob([vcfContent], { type: 'text/vcard' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'contacts.vcf';
+            a.download = `contact${contactCounter}.vcf`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            output.innerHTML = `<p class="text-green-600">Success! Downloaded <strong>contacts.vcf</strong> with ${contacts.length} contacts. Open the file in your contacts app to import.</p>`;
+            const remainingBlocks = blocks.slice(1);
+            let remaining = remainingBlocks.length;
+            contactInput.value = remainingBlocks.join('\n\n');
+            if (remaining > 0) contactInput.value += '\n\n';
+            let message = `Success! Downloaded contact${contactCounter}.vcf with 1 contact. `;
+            contactCounter++;
+            if (remaining > 0) {
+                message += `${remaining} contact${remaining === 1 ? '' : 's'} remaining. Click again for next.`;
+            } else {
+                message += 'All contacts processed.';
+            }
+            output.innerHTML = `<p class="text-green-600">${message}</p>`;
         }
         function toggleChatbot() {
             const chatbotWindow = document.getElementById('chatbotWindow');
@@ -1062,5 +1068,5 @@ END:VCARD
             input.value = '';
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98042cd85fd69340',t:'MTc1ODA2NTY3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
