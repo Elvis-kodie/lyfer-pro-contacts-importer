@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LYFER PROCONTACT IMPORTER</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.0/dist/tesseract.min.js"></script>
     <style>
         body {
             background: linear-gradient(to bottom right, #f3f4f6, #e5e7eb);
             min-height: 100vh;
-            font-size: 14px;
-            padding: 0.5rem;
+            font-size: 16px; /* Base font size for mobile */
         }
         .container {
             max-width: 100%;
-            padding: 0 0.5rem;
+            padding: 0.5rem; /* Reduced padding for mobile */
         }
         .header {
             background: linear-gradient(135deg, #1e3a8a, #1e293b);
             color: white;
             padding: 1.5rem;
-            border-radius: 0.75rem;
+            border-radius: 0.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             text-align: center;
             margin-bottom: 1rem;
@@ -41,7 +39,7 @@
         }
         .header h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* Smaller header for mobile */
             font-weight: 700;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -53,20 +51,19 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .header p {
-            font-size: 0.875rem;
+            font-size: 0.875rem; /* Smaller subtitle */
             color: #e5e7eb;
             margin-top: 0.5rem;
             position: relative;
         }
         textarea {
             resize: vertical;
-            min-height: 150px;
+            min-height: 150px; /* Smaller textarea height */
             font-size: 0.875rem;
         }
         .btn-primary {
             transition: transform 0.2s, background-color 0.3s;
-            padding: 0.75rem;
-            font-size: 0.875rem;
+            padding: 0.75rem; /* Larger touch target */
         }
         .btn-primary:hover {
             transform: scale(1.05);
@@ -78,7 +75,7 @@
         }
         .example-box {
             background: #f9fafb;
-            border-left: 3px solid #3b82f6;
+            border-left: 4px solid #3b82f6;
             padding: 0.75rem;
         }
         .custom-select {
@@ -88,16 +85,16 @@
         .custom-select-button {
             display: flex;
             align-items: center;
-            padding: 0.5rem;
+            padding: 0.75rem;
             border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             background: white;
             cursor: pointer;
             font-size: 0.875rem;
         }
         .custom-select-button img {
             width: 20px;
-            height: 14px;
+            height: 13px;
             margin-right: 6px;
         }
         .custom-select-dropdown {
@@ -110,7 +107,7 @@
             overflow-y: auto;
             background: white;
             border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 10;
         }
@@ -120,7 +117,7 @@
         .custom-select-option {
             display: flex;
             align-items: center;
-            padding: 0.5rem;
+            padding: 0.5rem 0.75rem;
             cursor: pointer;
             font-size: 0.875rem;
         }
@@ -129,13 +126,13 @@
         }
         .custom-select-option img {
             width: 20px;
-            height: 14px;
+            height: 13px;
             margin-right: 6px;
         }
         .chatbot-container {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
+            bottom: 10px;
+            right: 10px;
             z-index: 1000;
         }
         .chatbot-toggle {
@@ -144,7 +141,7 @@
             padding: 0.75rem;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
         }
         .chatbot-toggle:hover {
@@ -152,12 +149,11 @@
         }
         .chatbot-window {
             display: none;
-            width: 90vw;
-            max-width: 300px;
-            max-height: 70vh;
+            width: 90vw; /* Full width on mobile */
+            max-height: 80vh;
             background: white;
-            border-radius: 0.375rem;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
         .chatbot-window.show {
@@ -171,11 +167,11 @@
             font-size: 0.875rem;
         }
         .chatbot-messages {
-            max-height: 50vh;
+            max-height: 60vh;
             overflow-y: auto;
             padding: 0.75rem;
             background: #f9fafb;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
         }
         .chatbot-message {
             margin-bottom: 0.75rem;
@@ -202,7 +198,7 @@
             padding: 0.5rem;
             border: none;
             outline: none;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
         }
         .chatbot-input button {
             background: #3b82f6;
@@ -210,7 +206,6 @@
             padding: 0.5rem 0.75rem;
             border: none;
             cursor: pointer;
-            font-size: 0.75rem;
         }
         .chatbot-input button:hover {
             background: #2563eb;
@@ -225,19 +220,18 @@
         .image-upload-container {
             display: flex;
             flex-direction: column;
-            align-items: stretch;
+            align-items: flex-start;
             gap: 0.5rem;
             margin-bottom: 0.75rem;
         }
         .image-upload-label {
-            display: block;
-            padding: 0.5rem;
+            display: inline-block;
+            padding: 0.5rem 0.75rem;
             background: #e5e7eb;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             cursor: pointer;
-            text-align: center;
-            font-size: 0.875rem;
             transition: background-color 0.3s;
+            font-size: 0.875rem;
         }
         .image-upload-label:hover {
             background: #d1d5db;
@@ -252,12 +246,12 @@
         }
         .image-preview-item {
             position: relative;
-            max-width: 80px;
+            max-width: 80px; /* Smaller previews for mobile */
         }
         .image-preview {
             max-width: 100%;
             max-height: 80px;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             cursor: pointer;
         }
         .delete-button {
@@ -267,13 +261,13 @@
             background: #ef4444;
             color: white;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
             font-size: 0.75rem;
         }
@@ -302,9 +296,9 @@
             display: flex;
         }
         .modal img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 0.375rem;
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 0.5rem;
         }
         .modal-close {
             position: absolute;
@@ -313,8 +307,8 @@
             background: #ef4444;
             color: white;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -342,7 +336,7 @@
         .loading-content {
             background: white;
             padding: 1rem;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -360,38 +354,75 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Ensure Tailwind classes are mobile-friendly */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0.5rem;
+            }
+            .shadow-lg {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .p-6 {
+                padding: 1rem;
+            }
+            .mb-8 {
+                margin-bottom: 1.5rem;
+            }
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            .text-gray-600 {
+                font-size: 0.875rem;
+            }
+            .mb-4 {
+                margin-bottom: 0.75rem;
+            }
+            .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .px-4 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            pre {
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center p-4">
     <div class="container mx-auto">
         <div class="header">
-            <h1>LYFER PRO CONTACT IMPORTER</h1>
-            <p>Import up to 1000 contacts to your phone with ease.</p>
+            <h1>LYFER PROCONTACT IMPORTER</h1>
+            <p>Effortlessly import up to 1000 contacts to your iPhone or Android with a single click.</p>
         </div>
-
-        <div class="bg-white shadow-md rounded-lg p-4 mb-6">
-            <h2 class="text-lg font-semibold mb-3">How It Works</h2>
-            <p class="text-gray-600 mb-3 text-sm">Paste up to 100 contacts (name, phone/email) or upload screenshots to extract 10-digit phone numbers. The app formats them for you. Repeat for up to 1000 contacts.</p>
-            <div class="example-box mb-3">
-                <p class="font-semibold text-sm">Example Format:</p>
-                <pre class="text-xs text-gray-700">
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">How It Works</h2>
+            <p class="text-gray-600 mb-4">Paste up to 100 contacts at a time in any format (e.g., CSV, space-separated) or upload multiple screenshots to extract phone numbers automatically from every line or comment. Phone numbers must include the country code (e.g., +233 for Ghana). The app will format to: name, phone/email, blank line. Repeat for up to 1000 total contacts.</p>
+            <div class="example-box p-4 mb-4">
+                <p class="font-semibold">Example Format (after auto-formatting):</p>
+                <pre class="text-sm text-gray-700">
 John Doe
-+11234567890
-
++12025550123
 Jane Smith
-jane.smith@example.com
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bd979c9398d38e90948995bd98859c908d9198d39e9290">[email&#160;protected]</a>
                 </pre>
             </div>
-            <div class="image-upload-container mb-3">
+            <div class="image-upload-container mb-4">
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
                 <div class="upload-controls">
                     <label for="imageUpload" class="image-upload-label">Upload Screenshots</label>
                     <input type="file" id="imageUpload" class="image-upload-input" accept="image/*" multiple>
-                    <button onclick="extractNumbersFromImages()" class="btn-primary bg-blue-600 text-white py-2 px-3 rounded-lg text-sm">Extract Numbers</button>
+                    <button onclick="extractNumbersFromImages()" class="btn-primary bg-blue-600 text-white py-2 px-4 rounded-lg">Extract Numbers</button>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="countrySelect" class="block text-gray-700 font-semibold text-sm mb-1">Select Country</label>
+            <div id="fullScreenModal" class="modal">
+                <img id="fullScreenImage" alt="Full Screen Preview">
+                <div class="modal-close" onclick="closeFullScreen()">×</div>
+            </div>
+            <div class="mb-4">
+                <label for="countrySelect" class="block text-gray-700 font-semibold mb-2">Select Country</label>
                 <div class="custom-select">
                     <div class="custom-select-button" onclick="toggleDropdown()">
                         <img src="https://flagcdn.com/w20/us.png" alt="United States">
@@ -597,18 +628,16 @@ jane.smith@example.com
                     <input type="hidden" id="countryCallingCode" value="+1">
                 </div>
             </div>
-            <textarea id="contactInput" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Paste contacts (e.g., CSV, space-separated) or upload screenshots..."></textarea>
-            <button onclick="generateVCF()" class="btn-primary w-full mt-3 bg-blue-600 text-white py-2 rounded-lg font-semibold text-sm">Generate & Download (.vcf)</button>
+            <textarea id="contactInput" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Paste your contacts here (e.g., CSV, space-separated) or upload screenshots above..."></textarea>
+            <button onclick="generateVCF()" class="btn-primary w-full mt-4 bg-blue-600 text-white py-3 rounded-lg font-semibold">Generate & Download Contacts (.vcf)</button>
         </div>
-
-        <div id="output" class="output text-center text-gray-700 text-sm"></div>
-
+        <div id="output" class="output text-center text-gray-700"></div>
         <div class="chatbot-container">
             <div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
             <div id="chatbotWindow" class="chatbot-window">
                 <div class="chatbot-header">Contact Importer Help</div>
                 <div id="chatbotMessages" class="chatbot-messages">
-                    <div class="chatbot-message bot">Welcome! Ask any question about the LYFER PROCONTACT IMPORTER!</div>
+                    <div class="chatbot-message bot">Welcome! I'm here to answer any questions about the LYFER PROCONTACT IMPORTER or anything else. Ask away!</div>
                 </div>
                 <div class="chatbot-input">
                     <input id="chatbotInput" type="text" placeholder="Type your question...">
@@ -616,47 +645,40 @@ jane.smith@example.com
                 </div>
             </div>
         </div>
-
         <div class="footer">
             <p>&copy; 2025 LYFER PROCONTACT IMPORTER. All rights reserved.</p>
         </div>
-
         <div id="fullScreenModal" class="modal">
             <img id="fullScreenImage" alt="Full Screen Preview">
             <div class="modal-close" onclick="closeFullScreen()">×</div>
         </div>
-
         <div id="loadingOverlay" class="loading-overlay">
             <div class="loading-content">
                 <div class="spinner"></div>
-                <p class="text-gray-700 text-sm">Processing images...</p>
+                <p class="text-gray-700">Processing images...</p>
             </div>
         </div>
     </div>
-
     <script>
         let uploadedImages = [];
-
         function toggleDropdown() {
             const dropdown = document.getElementById('countryDropdown');
             dropdown.classList.toggle('show');
         }
-
         function selectCountry(countryCode, countryName, callingCode) {
             const button = document.querySelector('.custom-select-button');
             const flagImg = button.querySelector('img');
             const text = button.querySelector('span');
             const countrySelect = document.getElementById('countrySelect');
             const countryCallingCode = document.getElementById('countryCallingCode');
-
             flagImg.src = `https://flagcdn.com/w20/${countryCode.toLowerCase()}.png`;
             flagImg.alt = countryName;
             text.textContent = `${countryName} (${callingCode})`;
             countrySelect.value = countryCode;
             countryCallingCode.value = callingCode;
             document.getElementById('countryDropdown').classList.remove('show');
+            reformatContacts();
         }
-
         document.querySelectorAll('.custom-select-option').forEach(option => {
             option.addEventListener('click', () => {
                 const countryCode = option.getAttribute('data-value');
@@ -665,7 +687,6 @@ jane.smith@example.com
                 selectCountry(countryCode, countryName, callingCode);
             });
         });
-
         document.addEventListener('click', (event) => {
             const dropdown = document.getElementById('countryDropdown');
             const button = document.querySelector('.custom-select-button');
@@ -673,19 +694,16 @@ jane.smith@example.com
                 dropdown.classList.remove('show');
             }
         });
-
         document.getElementById('imageUpload').addEventListener('change', (event) => {
             const files = Array.from(event.target.files);
             const previewContainer = document.getElementById('imagePreviewContainer');
             const output = document.getElementById('output');
-
             files.forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const imgId = `imagePreview_${uploadedImages.length + index}`;
                     const imgData = { id: imgId, src: e.target.result };
                     uploadedImages.push(imgData);
-
                     const previewItem = document.createElement('div');
                     previewItem.className = 'image-preview-item';
                     previewItem.innerHTML = `
@@ -696,21 +714,18 @@ jane.smith@example.com
                 };
                 reader.readAsDataURL(file);
             });
-
-            output.innerHTML = `<p class="text-blue-600">${files.length} image(s) uploaded. Tap to view, extract, or delete.</p>`;
+            output.innerHTML = `<p class="text-blue-600">${files.length} image(s) uploaded. Tap an image to view full screen, "Extract Numbers" to process, or the trash icon to delete.</p>`;
             event.target.value = '';
         });
-
         function deleteImage(imgId) {
             uploadedImages = uploadedImages.filter(img => img.id !== imgId);
             const previewItem = document.querySelector(`#${imgId}`).parentElement;
             previewItem.remove();
             const output = document.getElementById('output');
             output.innerHTML = uploadedImages.length > 0
-                ? `<p class="text-blue-600">Image deleted. ${uploadedImages.length} image(s) remaining.</p>`
-                : `<p class="text-blue-600">All images deleted. Upload new images.</p>`;
+                ? `<p class="text-blue-600">Image deleted. ${uploadedImages.length} image(s) remaining. Tap an image to view full screen, "Extract Numbers" to process, or the trash icon to delete.</p>`
+                : `<p class="text-blue-600">All images deleted. Upload new images to extract phone numbers.</p>`;
         }
-
         function openFullScreen(imgId) {
             const modal = document.getElementById('fullScreenModal');
             const fullScreenImage = document.getElementById('fullScreenImage');
@@ -720,113 +735,209 @@ jane.smith@example.com
                 modal.classList.add('show');
             }
         }
-
         function closeFullScreen() {
             const modal = document.getElementById('fullScreenModal');
             modal.classList.remove('show');
         }
-
         async function extractNumbersFromImages() {
             const output = document.getElementById('output');
             const contactInput = document.getElementById('contactInput');
             const callingCode = document.getElementById('countryCallingCode').value;
+            const countryCode = document.getElementById('countrySelect').value;
             const loadingOverlay = document.getElementById('loadingOverlay');
-
             if (uploadedImages.length === 0) {
-                output.innerHTML = '<p class="text-red-500">Please upload at least one image.</p>';
+                output.innerHTML = '<p class="text-red-500">Please upload at least one image first.</p>';
                 return;
             }
-
             loadingOverlay.classList.add('show');
             output.innerHTML = '';
-
             let allPhoneNumbers = [];
             let errorCount = 0;
-
-            for (const imgData of uploadedImages) {
+            const phoneRegex = new RegExp(`\\${callingCode}\\d{7,}\\b`, 'g');
+            const ghanaLocalRegex = /\b0\d{7,9}\b/g; // For Ghana, match numbers like 0241234567
+            // Timeout wrapper for Tesseract processing
+            const withTimeout = (promise, timeoutMs) => {
+                return new Promise((resolve, reject) => {
+                    const timeout = setTimeout(() => {
+                        reject(new Error('OCR processing timed out'));
+                    }, timeoutMs);
+                    promise.then(
+                        (result) => {
+                            clearTimeout(timeout);
+                            resolve(result);
+                        },
+                        (error) => {
+                            clearTimeout(timeout);
+                            reject(error);
+                        }
+                    );
+                });
+            };
+            // Process images in parallel
+            const processImage = async (imgData) => {
                 try {
-                    const { data: { text } } = await Tesseract.recognize(imgData.src, 'eng', {
-                        logger: (m) => console.log(m),
-                    });
-
+                    const { data: { text } } = await withTimeout(
+                        Tesseract.recognize(imgData.src, 'eng', {
+                            logger: (m) => console.log(m),
+                        }),
+                        60000 // 60 seconds per image
+                    );
                     const lines = text.split('\n').map(line => line.trim()).filter(line => line);
-                    const phoneRegex = /\b0?\d{10}\b/g;
                     let phoneNumbers = [];
-
-                    lines.forEach((line, index) => {
+                    lines.forEach((line) => {
+                        // Match numbers with the country code
                         const matches = line.match(phoneRegex) || [];
                         matches.forEach(phone => {
-                            const cleaned = phone.replace(/[^0-9]/g, '');
-                            if (cleaned.length === 10) {
+                            const cleaned = phone.replace(/[^0-9+]/g, '');
+                            if (cleaned.startsWith(callingCode) && cleaned.length >= callingCode.length + 7) {
                                 phoneNumbers.push(cleaned);
                             }
                         });
+                        // For Ghana only, match local numbers starting with 0
+                        if (countryCode === 'GH') {
+                            const localMatches = line.match(ghanaLocalRegex) || [];
+                            localMatches.forEach(phone => {
+                                const cleaned = phone.replace(/[^0-9]/g, '').replace(/^0/, '');
+                                if (cleaned.length >= 7 && cleaned.length <= 9) {
+                                    phoneNumbers.push(`+233${cleaned}`);
+                                }
+                            });
+                        }
                     });
-
-                    phoneNumbers = [...new Set(phoneNumbers)];
-                    allPhoneNumbers.push(...phoneNumbers);
+                    return [...new Set(phoneNumbers)];
                 } catch (error) {
-                    console.error('OCR Error:', error);
-                    errorCount++;
+                    console.error('OCR Error for image', imgData.id, ':', error.message);
+                    return { error: true, id: imgData.id };
                 }
-            }
-
-            allPhoneNumbers = [...new Set(allPhoneNumbers)];
+            };
+            // Run all image processing in parallel
+            const results = await Promise.all(uploadedImages.map(processImage));
+            // Collect results
+            results.forEach(result => {
+                if (result.error) {
+                    errorCount++;
+                } else {
+                    allPhoneNumbers.push(...result);
+                }
+            });
+            allPhoneNumbers = [...new Set(allPhoneNumbers)]; // Remove duplicates
             loadingOverlay.classList.remove('show');
-
             if (allPhoneNumbers.length === 0) {
-                output.innerHTML = `<p class="text-red-500">No valid 10-digit phone numbers found. ${errorCount > 0 ? 'Some images failed to process.' : ''}</p>`;
+                output.innerHTML = `<p class="text-red-500">No valid phone numbers with country code ${callingCode}${countryCode === 'GH' ? ' or local format (0xxxxxxxx)' : ''} found in the image(s). ${errorCount > 0 ? `${errorCount} image(s) failed to process, possibly due to timeout or unreadable text.` : ''}</p>`;
                 return;
             }
-
+            // Auto-format to match site format: name, phone, blank line
             let formattedText = contactInput.value ? `${contactInput.value}\n\n` : '';
             allPhoneNumbers.forEach((phone, index) => {
-                const formattedPhone = `${callingCode}${phone.replace(/^0+/, '')}`;
-                formattedText += `Contact ${index + 1}\n${formattedPhone}\n\n`;
+                formattedText += `Contact ${index + 1}\n${phone}\n\n`;
             });
-
             contactInput.value = formattedText.trim();
-            output.innerHTML = `<p class="text-green-600">Extracted ${allPhoneNumbers.length} phone numbers from ${uploadedImages.length} image(s). ${errorCount > 0 ? `${errorCount} image(s) failed.` : ''} Review and generate .vcf.</p>`;
+            output.innerHTML = `<p class="text-green-600">Extracted and formatted ${allPhoneNumbers.length} valid phone numbers from ${uploadedImages.length} image(s) into required format (name, phone, blank line). ${errorCount > 0 ? `${errorCount} image(s) failed to process.` : ''} Ready to generate VCF. Tap "Generate & Download".</p>`;
+            reformatContacts();
         }
-
-        document.getElementById('contactInput').addEventListener('paste', (event) => {
-            event.preventDefault();
-            const pastedData = (event.clipboardData || window.clipboardData).getData('text');
-            const output = document.getElementById('output');
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+        function normalizePhoneNumber(phone, callingCode) {
+            const cleaned = phone.replace(/[^0-9+]/g, '');
+            if (cleaned.startsWith(callingCode) && cleaned.length >= callingCode.length + 7) {
+                return cleaned;
+            }
+            return '';
+        }
+        function reformatContacts() {
+            const contactInput = document.getElementById('contactInput');
+            const currentText = contactInput.value.trim();
             const callingCode = document.getElementById('countryCallingCode').value;
-
-            const lines = pastedData.split(/[\n,;\t]+|\s{2,}/).map(item => item.trim()).filter(item => item);
+            const countryCode = document.getElementById('countrySelect').value;
+            const output = document.getElementById('output');
+            if (!currentText) {
+                output.innerHTML = '';
+                return;
+            }
+            const lines = currentText.split('\n').map(item => item.trim()).filter(item => item);
             const contacts = [];
-            let currentName = '';
-            let isName = true;
-
-            for (let i = 0; i < lines.length; i++) {
-                const item = lines[i];
-                if (isName) {
-                    currentName = item;
-                    isName = false;
-                } else {
-                    if (item.match(/[@]/)) {
-                        contacts.push({ name: currentName, contact: item });
-                    } else if (item.match(/[0-9-().+\s]+/)) {
-                        let cleanedPhone = item.replace(/[^0-9]/g, '');
-                        if (cleanedPhone.length === 10) {
-                            let formattedPhone = `${callingCode}${cleanedPhone.replace(/^0+/, '')}`;
-                            contacts.push({ name: currentName, contact: formattedPhone });
-                        }
-                    } else {
-                        contacts.push({ name: currentName, contact: '' });
-                        currentName = item;
-                        continue;
+            let currentContact = { name: '', contact: '' };
+            let expectingContact = false;
+            const phoneRegex = new RegExp(`\\${callingCode}\\d{7,}\\b`, 'g');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const ghanaLocalRegex = /\b0\d{7,9}\b/g; // For Ghana local numbers
+            for (let item of lines) {
+                if (!item) {
+                    if (currentContact.name && currentContact.contact) {
+                        contacts.push({ ...currentContact });
+                        currentContact = { name: '', contact: '' };
+                        expectingContact = false;
                     }
-                    isName = true;
+                    continue;
+                }
+                const parts = item.split(/[,;\t]+|\s{2,}/).map(p => p.trim()).filter(p => p);
+                if (parts.length >= 2) {
+                    let name = parts[0];
+                    let contact = parts.slice(1).join(' ').trim();
+                    if (emailRegex.test(contact)) {
+                        currentContact.name = name;
+                        currentContact.contact = contact;
+                        contacts.push({ ...currentContact });
+                        currentContact = { name: '', contact: '' };
+                        expectingContact = false;
+                    } else {
+                        let phone = normalizePhoneNumber(contact, callingCode);
+                        if (!phone && countryCode === 'GH') {
+                            const localMatch = contact.match(ghanaLocalRegex);
+                            if (localMatch) {
+                                const cleaned = localMatch[0].replace(/[^0-9]/g, '').replace(/^0/, '');
+                                if (cleaned.length >= 7 && cleaned.length <= 9) {
+                                    phone = `+233${cleaned}`;
+                                }
+                            }
+                        }
+                        if (phone) {
+                            currentContact.name = name;
+                            currentContact.contact = phone;
+                            contacts.push({ ...currentContact });
+                            currentContact = { name: '', contact: '' };
+                            expectingContact = false;
+                        } else {
+                            currentContact.name = name;
+                            expectingContact = true;
+                        }
+                    }
+                } else if (expectingContact) {
+                    if (emailRegex.test(item)) {
+                        currentContact.contact = item;
+                        contacts.push({ ...currentContact });
+                        currentContact = { name: '', contact: '' };
+                        expectingContact = false;
+                    } else {
+                        let phone = normalizePhoneNumber(item, callingCode);
+                        if (!phone && countryCode === 'GH') {
+                            const localMatch = item.match(ghanaLocalRegex);
+                            if (localMatch) {
+                                const cleaned = localMatch[0].replace(/[^0-9]/g, '').replace(/^0/, '');
+                                if (cleaned.length >= 7 && cleaned.length <= 9) {
+                                    phone = `+233${cleaned}`;
+                                }
+                            }
+                        }
+                        if (phone) {
+                            currentContact.contact = phone;
+                            contacts.push({ ...currentContact });
+                            currentContact = { name: '', contact: '' };
+                            expectingContact = false;
+                        } else {
+                            currentContact = { name: item, contact: '' };
+                            expectingContact = true;
+                        }
+                    }
+                } else {
+                    currentContact.name = item;
+                    expectingContact = true;
                 }
             }
-
-            if (!isName && currentName) {
-                contacts.push({ name: currentName, contact: '' });
+            if (currentContact.name && currentContact.contact) {
+                contacts.push({ ...currentContact });
             }
-
             let formattedText = '';
             let validContacts = 0;
             for (const contact of contacts) {
@@ -835,58 +946,60 @@ jane.smith@example.com
                     validContacts++;
                 }
             }
-
-            document.getElementById('contactInput').value = formattedText.trim();
-
+            contactInput.value = formattedText.trim();
             if (validContacts > 0) {
-                output.innerHTML = `<p class="text-blue-600">Reformatted ${validContacts} contacts. Review and generate .vcf.</p>`;
+                output.innerHTML = `<p class="text-blue-600">Reformatted ${validContacts} valid contacts to match required format (name, phone/email, blank line). Review and tap "Generate & Download".</p>`;
             } else {
-                output.innerHTML = `<p class="text-red-500">No valid contacts found. Ensure name and 10-digit phone/email.</p>`;
+                output.innerHTML = `<p class="text-red-500">No valid contacts found. Ensure each contact has a name and a phone number with country code ${callingCode} or an email.</p>`;
             }
+        }
+        document.getElementById('contactInput').addEventListener('paste', (event) => {
+            event.preventDefault();
+            const pastedData = (event.clipboardData || window.clipboardData).getData('text');
+            const contactInput = document.getElementById('contactInput');
+            contactInput.value = pastedData;
+            setTimeout(reformatContacts, 0);
         });
-
+        document.getElementById('contactInput').addEventListener('input', () => {
+            clearTimeout(window.reformatTimeout);
+            window.reformatTimeout = setTimeout(reformatContacts, 500);
+        });
         function generateVCF() {
             const input = document.getElementById('contactInput').value.trim();
             const output = document.getElementById('output');
             const country = document.getElementById('countrySelect').value;
             const callingCode = document.getElementById('countryCallingCode').value;
-
             if (!input) {
-                output.innerHTML = '<p class="text-red-500">Paste contacts or upload images first!</p>';
+                output.innerHTML = '<p class="text-red-500">Please paste some contacts or upload images first!</p>';
                 return;
             }
-
             const lines = input.split('\n').map(line => line.trim()).filter(line => line);
             if (lines.length % 2 !== 0) {
-                output.innerHTML = '<p class="text-red-500">Odd number of lines. Each contact needs a name and phone/email.</p>';
+                output.innerHTML = '<p class="text-red-500">Odd number of lines. Each contact needs a name and a phone/email. Adjust and try again.</p>';
                 return;
             }
-
+            if (lines.length > 200)
             if (lines.length > 200) {
-                output.innerHTML = '<p class="text-red-500">Too many lines. Paste up to 100 contacts (200 lines).</p>';
+                output.innerHTML = '<p class="text-red-500">Too many lines. Please paste up to 100 contacts (200 lines) at a time.</p>';
                 return;
             }
-
             const contacts = [];
             for (let i = 0; i < lines.length; i += 2) {
                 const name = lines[i];
                 let phone = lines[i + 1];
                 if (!phone.includes('@')) {
-                    const cleanedPhone = phone.replace(/[^0-9]/g, '').replace(/^0+/, '');
-                    if (cleanedPhone.length === 10) {
-                        phone = `${callingCode}${cleanedPhone}`;
-                        contacts.push({ name, phone });
+                    const cleanedPhone = phone.replace(/[^0-9+]/g, '');
+                    if (cleanedPhone.startsWith(callingCode) && cleanedPhone.length >= callingCode.length + 7) {
+                        contacts.push({ name, phone: cleanedPhone });
                     }
                 } else {
                     contacts.push({ name, phone });
                 }
             }
-
             if (contacts.length === 0) {
-                output.innerHTML = '<p class="text-red-500">No valid contacts. Check format (name, 10-digit phone/email).</p>';
+                output.innerHTML = `<p class="text-red-500">No valid contacts found. Check your format (names and phone numbers with country code ${callingCode} or emails).</p>`;
                 return;
             }
-
             let vcfContent = '';
             contacts.forEach(contact => {
                 vcfContent += `BEGIN:VCARD
@@ -897,7 +1010,6 @@ ADR;TYPE=HOME:;;;${country};;;
 END:VCARD
 `;
             });
-
             const blob = new Blob([vcfContent], { type: 'text/vcard' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -907,52 +1019,41 @@ END:VCARD
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-
-            output.innerHTML = `<p class="text-green-600">Downloaded <strong>contacts.vcf</strong> with ${contacts.length} contacts. Open in your Contacts app.</p>`;
+            output.innerHTML = `<p class="text-green-600">Success! Downloaded <strong>contacts.vcf</strong> with ${contacts.length} contacts. Open the file in your contacts app to import.</p>`;
         }
-
         function toggleChatbot() {
             const chatbotWindow = document.getElementById('chatbotWindow');
             chatbotWindow.classList.toggle('show');
         }
-
         async function sendChatbotMessage() {
             const input = document.getElementById('chatbotInput');
             const messages = document.getElementById('chatbotMessages');
             const question = input.value.trim();
-
             if (!question) return;
-
             const userMessage = document.createElement('div');
             userMessage.className = 'chatbot-message user';
             userMessage.textContent = question;
             messages.appendChild(userMessage);
-
-            let botResponse = "Sorry, I'm having trouble connecting to the AI service. Please try again or ask about the LYFER PROCONTACT IMPORTER.";
+            let botResponse = "Sorry, I'm having trouble connecting to the AI service. Please try again or ask about the LYFER PROCONTACT IMPORTER for more specific help.";
             if (question.toLowerCase().includes('how to use') || question.toLowerCase().includes('how does it work')) {
-                botResponse = "Paste up to 100 contacts (name, phone/email) or upload screenshots to extract 10-digit phone numbers. Select a country for the correct code. Tap previews (80px wide) to view full screen, extract numbers, or delete with the trash icon. Generate a .vcf file to import into your Contacts app.";
+                botResponse = "To use the LYFER PROCONTACT IMPORTER, paste up to 100 contacts in any format (e.g., CSV, space-separated) into the textarea or upload multiple screenshots to extract phone numbers from every line or comment. Select a country to apply the correct country code. Phone numbers must include the selected country code (e.g., +233 for Ghana). Compact image previews (100px wide) appear above the upload and extract buttons. Click an image to view it full screen, 'Extract Numbers' to process all images (a loading screen will appear), or the trash icon to delete an image. Click 'Generate & Download Contacts (.vcf)' to create a .vcf file, which you can open in your phone's Contacts app to import.";
             } else if (question.toLowerCase().includes('country code') || question.toLowerCase().includes('phone number format')) {
-                botResponse = "Select a country to set the code (e.g., +1 for US). Phone numbers must be 10 digits (excluding code).";
+                botResponse = "Select a country from the dropdown to set the country code (e.g., +233 for Ghana, +1 for the US). The app ensures phone numbers include the selected country code and contain only digits afterward.";
             } else if (question.toLowerCase().includes('how many contacts') || question.toLowerCase().includes('limit')) {
-                botResponse = "Paste or extract up to 100 contacts (200 lines) at a time. Repeat for up to 1000 total.";
+                botResponse = "You can paste or extract up to 100 contacts at a time (200 lines, with each contact needing a name and a phone number with the selected country code or an email). Repeat the process for up to 1000 contacts in total.";
             } else if (question.toLowerCase().includes('vcf') || question.toLowerCase().includes('what is vcf')) {
-                botResponse = "A .vcf file stores contacts. Generate it and open it in your Contacts app to import.";
+                botResponse = "A .vcf file is a vCard file that stores contact information. The app generates a .vcf file from your contacts or extracted phone numbers, which you can open in your phone's Contacts app to import.";
             } else if (question.toLowerCase().includes('supported devices') || question.toLowerCase().includes('iphone') || question.toLowerCase().includes('android')) {
-                botResponse = "Works with iPhone and Android. The .vcf file is compatible with both Contacts apps.";
+                botResponse = "The LYFER PROCONTACT IMPORTER works with both iPhone and Android. The generated .vcf file is compatible with the Contacts app on both platforms.";
             } else if (question.toLowerCase().includes('screenshot') || question.toLowerCase().includes('image upload') || question.toLowerCase().includes('extract numbers')) {
-                botResponse = "Upload screenshots via 'Upload Screenshots'. Tap previews (80px wide) to view full screen, extract 10-digit numbers, or delete with the trash icon.";
+                botResponse = "Upload multiple screenshots using the 'Upload Screenshots' button. Compact previews (100px wide) appear above the buttons. Click an image to view it full screen, 'Extract Numbers' to detect phone numbers with the selected country code from every line or comment in all images (a loading screen will appear), or use the trash icon to delete an image.";
             } else if (question.toLowerCase().includes('delete image') || question.toLowerCase().includes('remove image') || question.toLowerCase().includes('trash icon')) {
-                botResponse = "Tap the trash icon (🗑️) on an image preview to delete it.";
-            } else if (question.toLowerCase().includes('10 digits') || question.toLowerCase().includes('phone number length')) {
-                botResponse = "Extracts 10-digit phone numbers (excluding country code) and adds the selected code.";
+                botResponse = "To delete an uploaded image, click the trash can icon (🗑️) on the top-right corner of its compact preview above the upload and extract buttons.";
+            } else if (question.toLowerCase().includes('phone number length') || question.toLowerCase().includes('digits')) {
+                botResponse = "The app extracts phone numbers that include the selected country code (e.g., +233 for Ghana) followed by digits, with no strict length requirement, from every line or comment in the screenshots or pasted text.";
             } else if (question.toLowerCase().includes('full screen') || question.toLowerCase().includes('view image')) {
-                botResponse = "Tap an image preview to view full screen. Tap '×' to close.";
-            } else if (question.toLowerCase().includes('multiple screenshots') || question.toLowerCase().includes('plenty screenshots')) {
-                botResponse = "Upload multiple screenshots. Previews (80px wide) appear above buttons. Tap to view full screen, extract numbers, or delete.";
-            } else if (question.toLowerCase().includes('loading') || question.toLowerCase().includes('processing')) {
-                botResponse = "A loading spinner appears when extracting numbers from images. It disappears when done.";
+                botResponse = "Click a compact image preview (100px wide, above the upload and extract buttons) to view that screenshot in full screen. Click the '×' button in the top-right corner to close the full-screen view.";
             }
-
             const botMessage = document.createElement('div');
             botMessage.className = 'chatbot-message bot';
             botMessage.textContent = botResponse;
@@ -960,12 +1061,6 @@ END:VCARD
             messages.scrollTop = messages.scrollHeight;
             input.value = '';
         }
-
-        document.getElementById('chatbotInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendChatbotMessage();
-            }
-        });
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98042cd85fd69340',t:'MTc1ODA2NTY3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
